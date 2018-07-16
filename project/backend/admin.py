@@ -6,6 +6,9 @@ from .models import Book, Category, Author
 class BookAdmin(admin.ModelAdmin):
     list_display = ['title']
 
+    class Meta:
+        model = Book
+
 
 admin.site.register(Book, BookAdmin)
 

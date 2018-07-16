@@ -1,12 +1,15 @@
-from  django.conf.urls import url,include
+from django.conf.urls import url
+from django.urls import path
 from rest_framework import routers
-from rest_framework.urlpatterns import format_suffix_patterns
+
+from . import views
 from .views import CreateView
+
 router = routers.DefaultRouter()
 router.register(r'users', CreateView)
 urlpatterns = [
-    url(r'^booklist/$', CreateView.as_view(), name='create')
+
+    path('', views.index, name='index'),
+    path('booklist/', CreateView.as_view(), name='create')
 
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
