@@ -54,8 +54,11 @@ class Book(models.Model):
 class Author(models.Model):
     name = models.CharField("Name", max_length=100, blank=False)
     email = models.EmailField("Email", max_length=50, blank=False, null=True)
+    book = models.ManyToManyField(Book,
+                                  through='BookLinkAuthor',
+                                  through_fields=('author', 'book'),
+                                  )
 
-    # book
     # image
 
     class Meta:
@@ -66,3 +69,9 @@ class Author(models.Model):
 
     def get_absolute_url(self):
         pass
+
+
+class BookLinkAuthor(models.Model):
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+
